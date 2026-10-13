@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>СТО Регион — автосервис в Благовещенске</title>
+  <meta name="description" content="СТО Регион в Благовещенске: диагностика, ремонт двигателя, ходовой, тормозов, шиномонтаж и компьютерная диагностика. Запись по телефону 8 961 959-26-82." />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg2: #111827;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --text: #f3f4f6;
+      --muted: #cbd5e1;
+      --accent: #f97316;
+      --accent2: #fb923c;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,15,20,0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      font-size: 20px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #ef4444);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(249,115,22,0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(249,115,22,0.14);
+      border: 1px solid rgba(249,115,22,0.35);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 92px 0 70px;
+      background:
+        linear-gradient(90deg, rgba(11,15,20,0.92) 0%, rgba(11,15,20,0.72) 42%, rgba(11,15,20,0.35) 100%),
+        url('images/hero.jpg') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.02;
+      margin: 0 0 18px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 16px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ef4444);
+      color: white;
+      box-shadow: 0 16px 40px rgba(249,115,22,0.28);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--line);
+      color: white;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .hero-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 20px;
+      color: white;
+    }
+
+    .mini span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.8px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .service {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      min-height: 190px;
+      transition: 0.2s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-4px);
+      background: var(--card2);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(249,115,22,0.14);
+      border: 1px solid rgba(249,115,22,0.28);
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .service h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .service p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .about-photo {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      min-height: 420px;
+      background:
+        linear-gradient(180deg, rgba(11,15,20,0.10), rgba(11,15,20,0.45)),
+        url('images/garage.jpg') center/cover no-repeat;
+    }
+
+    .about-content {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+    }
+
+    .about-content h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.8px;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .feature {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+
+    .feature strong { display: block; margin-bottom: 6px; }
+    .feature span { color: var(--muted); font-size: 14px; }
+
+    .price-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+
+    .price-item div:first-child { max-width: 70%; }
+    .price-item strong { display: block; margin-bottom: 4px; }
+    .price-item span { color: var(--muted); font-size: 14px; }
+    .price-item b {
+      color: var(--accent2);
+      white-space: nowrap;
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .booking-info {
+      background:
+        linear-gradient(180deg, rgba(11,15,20,0.35), rgba(11,15,20,0.88)),
+        url('images/mechanic.jpg') center/cover no-repeat;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      padding: 30px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .booking-info h2 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.8px;
+    }
+
+    .booking-info p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .booking-form {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 16px;
+      outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.45); }
+
+    .form-footer {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 520px;
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .map {
+      margin-top: 16px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      height: 360px;
+      background: #111827;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 20px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .floating-call {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #ef4444);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .about-wrap, .booking { grid-template-columns: 1fr; }
+      .services { grid-template-columns: repeat(2, 1fr); }
+      .price-grid, .form-grid { grid-template-columns: 1fr; }
+      .contacts-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding-top: 70px; }
+      .hero-card img { height: 260px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 24px, 1180px); }
+      .services { grid-template-columns: 1fr; }
+      .hero-mini { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; align-items: start; }
+      .phone { font-size: 14px; padding: 10px 12px; }
+      .hero-actions .btn { width: 100%; }
+      .form-footer .btn { width: 100%; }
+      section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="logo">
+        <div class="logo-mark">🔧</div>
+        <div>СТО Регион</div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#prices">Цены</a>
+        <a href="#booking">Запись</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <a class="phone" href="tel:+79619592682">📞 8 961 959-26-82</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">Автосервис в Благовещенске</div>
+          <h1>Ремонт и обслуживание автомобилей в Благовещенске</h1>
+          <p>
+            Диагностика, ремонт двигателя, ходовой, тормозной системы, шиномонтаж
+            и компьютерная диагностика. Работаем аккуратно, быстро и с гарантией.
+          </p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary">Записаться на сервис</a>
+            <a href="#prices" class="btn btn-secondary">Смотреть цены</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="images/mechanic.jpg" alt="Автомеханик работает с автомобилем">
+          <div class="hero-mini">
+            <div class="mini"><strong>Быстро</strong><span>приём в удобное время</span></div>
+            <div class="mini"><strong>Честно</strong><span>понятные цены</span></div>
+            <div class="mini"><strong>Надёжно</strong><span>гарантия на работы</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>Услуги автосервиса</h2>
+          <p>Помогаем с техническим обслуживанием и ремонтом автомобилей разных марок.</p>
+        </div>
+
+        <div class="services">
+          <div class="service">
+            <div class="icon">🛠</div>
+            <h3>Диагностика</h3>
+            <p>Проверка состояния автомобиля и поиск неисправностей.</p>
+          </div>
+          <div class="service">
+            <div class="icon">🧰</div>
+            <h3>Ремонт двигателя</h3>
+            <p>Обслуживание и ремонт двигателей бензиновых и дизельных авто.</p>
+          </div>
+          <div class="service">
+            <div class="icon">⚙️</div>
+            <h3>Ремонт ходовой</h3>
+            <p>Подвеска, стойки, шаровые, рычаги, ступичные подшипники.</p>
+          </div>
+          <div class="service">
+            <div class="icon">🛑</div>
+            <h3>Тормозная система</h3>
+            <p>Замена колодок, дисков, тормозной жидкости и обслуживание суппортов.</p>
+          </div>
+          <div class="service">
+            <div class="icon">🛞</div>
+            <h3>Шиномонтаж</h3>
+            <p>Сезонная замена шин, балансировка и проверка давления.</p>
+          </div>
+          <div class="service">
+            <div class="icon">🔌</div>
+            <h3>Электрика</h3>
+            <p>Диагностика и ремонт электрооборудования автомобиля.</p>
+          </div>
+          <div class="service">
+            <div class="icon">💻</div>
+            <h3>Компьютерная диагностика</h3>
+            <p>Считывание ошибок, проверка датчиков и систем управления.</p>
+          </div>
+          <div class="service">
+            <div class="icon">🧊</div>
+            <h3>ТО и замена масла</h3>
+            <p>Регулярное обслуживание, фильтры, масла и расходники.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container about-wrap">
+        <div class="about-photo"></div>
+        <div class="about-content">
+          <h2>Почему выбирают «СТО Регион»</h2>
+          <p>
+            Мы делаем акцент на качестве, понятной стоимости и нормальном отношении к клиенту.
+            Поможем разобраться в проблеме, объясним, что нужно менять, а что ещё послужит.
+          </p>
+          <div class="features">
+            <div class="feature">
+              <strong>Опытные мастера</strong>
+              <span>Работаем с разными марками и моделями автомобилей.</span>
+            </div>
+            <div class="feature">
+              <strong>Понятные цены</strong>
+              <span>Согласовываем стоимость до начала ремонта.</span>
+            </div>
+            <div class="feature">
+              <strong>Гарантия на работы</strong>
+              <span>Ответственно подходим к каждой заявке.</span>
+            </div>
+            <div class="feature">
+              <strong>Удобная запись</strong>
+              <span>Можно записаться через форму или по телефону.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prices">
+      <div class="container">
+        <div class="section-head">
+          <h2>Цены на популярные услуги</h2>
+          <p>Ниже — ориентировочная стоимость. Точную цену подтверждаем после диагностики.</p>
+        </div>
+
+        <div class="price-box">
+          <div class="price-grid">
+            <div class="price-item">
+              <div>
+                <strong>Компьютерная диагностика</strong>
+                <span>Проверка ошибок и основных систем автомобиля</span>
+              </div>
+              <b>от 1 000 ₽</b>
+            </div>
+            <div class="price-item">
+              <div>
+                <strong>Замена масла ДВС</strong>
+                <span>Работа без учёта стоимости масла и фильтра</span>
+              </div>
+              <b>от 800 ₽</b>
+            </div>
+            <div class="price-item">
+              <div>
+                <strong>Замена тормозных колодок</strong>
+                <span>На одну ось, в зависимости от модели авто</span>
+              </div>
+              <b>от 1 200 ₽</b>
+            </div>
+            <div class="price-item">
+              <div>
+                <strong>Диагностика ходовой</strong>
+                <span>Проверка подвески и элементов управления</span>
+              </div>
+              <b>от 800 ₽</b>
+            </div>
+            <div class="price-item">
+              <div>
+                <strong>Шиномонтаж</strong>
+                <span>Сезонная замена колёс, балансировка отдельно</span>
+              </div>
+              <b>от 1 500 ₽</b>
+            </div>
+            <div class="price-item">
+              <div>
+                <strong>Замена свечей зажигания</strong>
+                <span>Работа без учёта стоимости свечей</span>
+              </div>
+              <b>от 1 000 ₽</b>
+            </div>
+          </div>
+          <div class="note">* Итоговая стоимость зависит от марки автомобиля, состояния узлов и выбранных запчастей.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking">
+      <div class="container booking">
+        <div class="booking-info">
+          <h2>Записаться на обслуживание</h2>
+          <p>Оставьте заявку — мы свяжемся с вами, уточним детали и подберём удобное время.</p>
+        </div>
+
+        <form class="booking-form" action="mailto:sto-region@example.ru" method="post" enctype="text/plain">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Ваше имя</label>
+              <input id="name" name="Имя" type="text" placeholder="Например, Алексей" required>
+            </div>
+            <div class="field">
+              <label for="phone">Телефон</label>
+              <input id="phone" name="Телефон" type="tel" placeholder="+7 ___ ___-__-__" required>
+            </div>
+            <div class="field">
+              <label for="car">Марка и модель авто</label>
+              <input id="car" name="Автомобиль" type="text" placeholder="Например, Toyota Camry">
+            </div>
+            <div class="field">
+              <label for="service">Нужная услуга</label>
+              <select id="service" name="Услуга">
+                <option>Диагностика</option>
+                <option>Ремонт двигателя</option>
+                <option>Ремонт ходовой</option>
+                <option>Тормозная система</option>
+                <option>Шиномонтаж</option>
+                <option>Компьютерная диагностика</option>
+                <option>Замена масла</option>
+                <option>Другое</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">Комментарий</label>
+              <textarea id="message" name="Комментарий" placeholder="Опишите проблему или удобное время визита"></textarea>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div class="small">Нажимая кнопку, вы отправляете заявку. Мы перезвоним для подтверждения записи.</div>
+            <button class="btn btn-primary" type="submit">Отправить заявку</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <div class="section-head">
+          <h2>Контакты</h2>
+          <p>Мы находимся в Благовещенске. Звоните или приезжайте — поможем с вашим автомобилем.</p>
+        </div>
+
+        <div class="contacts-grid">
+          <div class="contact-card">
+            <h3>Телефон</h3>
+            <p><a href="tel:+79619592682">8 961 959-26-82</a></p>
+          </div>
+          <div class="contact-card">
+            <h3>Адрес</h3>
+            <p>Благовещенск, улица Островского, 37а</p>
+          </div>
+          <div class="contact-card">
+            <h3>Режим работы</h3>
+            <p>Пн–Сб: 9:00–19:00<br>Вс: по договорённости</p>
+          </div>
+        </div>
+
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps?q=%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9E%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2037%D0%B0&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> СТО Регион, Благовещенск</div>
+      <div><a href="tel:+79619592682">8 961 959-26-82</a></div>
+    </div>
+  </footer>
+
+  <a class="floating-call" href="tel:+79619592682" aria-label="Позвонить">📞</a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
